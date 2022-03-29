@@ -7,8 +7,8 @@ mydb = mysql.connector.connect(
     host="34.88.254.196",
     user="root",
     password="12345",
-    database="tema3-db"
-    # socketPath='/cloudsql/cc-tema3-345518:europe-north1:database'
+    database="tema3-db",
+    socketPath='/cloudsql/cc-tema3-345518:europe-north1:database'
 )
 
 @app.route('/')
