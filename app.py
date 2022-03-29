@@ -13,8 +13,8 @@ def index():
         password="12345",
         database="tema3-db",
     )
-
     mycursor = mydb.cursor()
+    
 
     mycursor.execute("SELECT * FROM translate")
 
