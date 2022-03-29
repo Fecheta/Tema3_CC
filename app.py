@@ -14,7 +14,7 @@ def index():
         database="tema3-db",
     )
     mycursor = mydb.cursor()
-    
+
 
     mycursor.execute("SELECT * FROM translate")
 
