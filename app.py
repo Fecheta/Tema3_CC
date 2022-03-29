@@ -1,6 +1,7 @@
 from flask import Flask, Response, jsonify, render_template
 import mysql.connector
 from Gmail_Resources.gmail import sendmail
+from calendar_resources.Calendar import cal_requests
 
 app = Flask(__name__)
 
@@ -36,6 +37,10 @@ def gmail(value):
     sendmail()
     return render_template('gmail.html', value=int(value))
 
+@app.route('/calendar')
+def calendar():
+    cal_requests()
+    return render_template('calendar.html', value=int(1))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
