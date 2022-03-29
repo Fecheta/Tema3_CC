@@ -3,24 +3,24 @@ import mysql.connector
 
 app = Flask(__name__)
 
-mydb = mysql.connector.connect(
-    host="34.88.254.196",
-    user="root",
-    password="12345",
-    database="tema3-db"
-)
+# mydb = mysql.connector.connect(
+#     host="34.88.254.196",
+#     user="root",
+#     password="12345",
+#     database="tema3-db"
+# )
 
 @app.route('/')
 def index():
-    print(mydb)
+    # print(mydb)
+    #
+    # mycursor = mydb.cursor()
+    #
+    # mycursor.execute("SELECT * FROM translate")
+    #
+    # myresult = mycursor.fetchall()
 
-    mycursor = mydb.cursor()
-
-    mycursor.execute("SELECT * FROM translate")
-
-    myresult = mycursor.fetchall()
-
-    return render_template('index.html', mydb=myresult)
+    return render_template('index.html')
 
 
 @app.route('/translate/<value>')
