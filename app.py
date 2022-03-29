@@ -8,29 +8,31 @@ app = Flask(__name__)
 
 # @app.route('/')
 # def index():
-#     # print(mydb)
-#     mydb = mysql.connector.connect(
-#         host="34.88.254.196",
-#         user="root",
-#         password="12345",
-#         database="tema3-db",
-#     )
+#     # # print(mydb)
+#     # mydb = mysql.connector.connect(
+#     #     host="34.88.254.196",
+#     #     user="root",
+#     #     password="12345",
+#     #     database="tema3-db",
+#     # )
+#     #
+#     # mycursor = mydb.cursor()
+#     #
+#     # mycursor.execute("SELECT * FROM translate")
+#     #
+#     # myresult = mycursor.fetchall()
 #
-#     mycursor = mydb.cursor()
-#
-#     mycursor.execute("SELECT * FROM translate")
-#
-#     myresult = mycursor.fetchall()
-#
-#     return render_template('index.html', mydb=myresult)
+#     return render_template('index.html', mydb='myresult')
 
 @app.route('/')
 def index():
     return render_template("index.html")
 
+
 @app.route('/translate/<value>')
 def translate(value):
     return render_template('translate.html', value=int(value))
+
 
 @app.route('/gmail/<value>')
 def gmail(value):
