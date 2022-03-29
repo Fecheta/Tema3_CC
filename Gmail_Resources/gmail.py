@@ -6,7 +6,7 @@ from Gmail_Resources.Google import Create_Service
 
 
 def sendmail():
-    CLIENT_SECRET_FILE = 'client_secret.json'
+    CLIENT_SECRET_FILE = 'Gmail_Resources/client_secret.json'
     API_NAME = 'gmail'
     API_VERSION = 'v1'
     SCOPES = ['https://mail.google.com/']
