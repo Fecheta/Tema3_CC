@@ -6,6 +6,7 @@ from calendar_resources.Calendar import cal_requests
 from reCAPTCHA_resources.reCAPTCHA import Widgets
 from youtube.youtube_api import YoutubeAPI
 from translate.translate_api import translate_text
+from places.places_api import PlacesAPI
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "mysecretkey"
@@ -67,6 +68,13 @@ def youtube_api(value):
     yapi = YoutubeAPI(value)
 
     return render_template('youtube.html', video_id=yapi.get_first_from_search())
+
+
+@app.route('/places/<value>')
+def places(value):
+    places_api = PlacesAPI()
+    result = places_api.get_place(value)
+    return render_template('places.html', result=result)
 
 
 if __name__ == '__main__':
