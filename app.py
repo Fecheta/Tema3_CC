@@ -57,7 +57,7 @@ def sendgmail():
     if request.method == "POST":
         if (request.form["g-recaptcha-response"] != ''):
             name = request.form["name"]
-            sendmail("Hello " + name)
+            sendmail("Hello " + name + "\n")
             return render_template("gmail_sent.html")
         else:
             return render_template("invalid.html")
