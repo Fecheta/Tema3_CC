@@ -52,13 +52,12 @@ def translate2(value):
 @app.route('/gmail', methods=("GET", "POST"))
 def sendgmail():
     form = Widgets()
-
     if request.method == "GET":
         return render_template('gmail.html', form=form)
     if request.method == "POST":
         if (request.form["g-recaptcha-response"] != ''):
             name = request.form["name"]
-            sendmail("Hello " + name)
+            sendmail("Hello " + name + "\n")
             return render_template("gmail_sent.html")
         else:
             return render_template("invalid.html")
