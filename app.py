@@ -19,7 +19,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/translate/<value>')
+@app.route('/translate2/<value>')
 def translate(value):
     mydb = mysql.connector.connect(
         host="34.88.254.196",
@@ -40,12 +40,12 @@ def translate(value):
 
     mydb.commit()
     mydb.close()
-    return render_template('translate.html', result=result)
+    return render_template('translate.html', result=result, db='Translation added to database')
 
-@app.route('/translate2/<value>')
+@app.route('/translate/<value>')
 def translate2(value):
 
-    return render_template('translate.html', result=translate_text('ro', value)['translatedText'])
+    return render_template('translate.html', result=translate_text('ro', value))
 
 
 @app.route('/gmail/<value>')

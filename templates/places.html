@@ -8,10 +8,8 @@
 </head>
 <body>
     <div>
-<!--        {% for message in value %}-->
-<!--            <h2 class="c">Ana are {{ message }} mere</h2>-->
-<!--        {% endfor %}-->
-        <h2>{{result}}</h2>
+        <h1><b>Address: </b>{{result['formatted_address']}}</h1>
+        <h2><b>Location: </b>{{result['geometry']['location']}}</h2>
     </div>
 </body>
 </html>
