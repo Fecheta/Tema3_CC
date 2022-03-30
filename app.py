@@ -1,4 +1,4 @@
-from flask import Flask, Response, jsonify, render_template
+from flask import Flask, Response, jsonify, render_template, request
 import mysql.connector
 
 from Gmail_Resources.gmail import sendmail
@@ -48,12 +48,20 @@ def translate2(value):
     return render_template('translate.html', result=translate_text('ro', value))
 
 
-@app.route('/gmail/<value>')
-def gmail(value):
-    print(value)
+
+@app.route('/gmail', methods=("GET", "POST"))
+def sendgmail():
     form = Widgets()
-    sendmail()
-    return render_template('gmail.html', form=form)
+
+    if request.method == "GET":
+        return render_template('gmail.html', form=form)
+    if request.method == "POST":
+        if (request.form["g-recaptcha-response"] != ''):
+            name = request.form["name"]
+            sendmail("Hello " + name)
+            return render_template("gmail_sent.html")
+        else:
+            return render_template("invalid.html")
 
 
 @app.route('/calendar')
