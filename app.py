@@ -3,6 +3,7 @@ import mysql.connector
 from Gmail_Resources.gmail import sendmail
 from calendar_resources.Calendar import cal_requests
 from youtube.youtube_api import YoutubeAPI
+from translate.translate_api import translate_text
 
 app = Flask(__name__)
 
@@ -32,7 +33,7 @@ def index():
 
 @app.route('/translate/<value>')
 def translate(value):
-    return render_template('translate.html', value=int(value))
+    return render_template('translate.html', result=translate_text('ro', value))
 
 
 @app.route('/gmail/<value>')
