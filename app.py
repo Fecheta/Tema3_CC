@@ -1,11 +1,9 @@
 from flask import Flask, Response, jsonify, render_template
-from flask_wtf import FlaskForm, RecaptchaField
 import mysql.connector
-from wtforms import StringField, RadioField, SelectField, TextAreaField, DateTimeField, SubmitField
-from wtforms.validators import DataRequired
 
 from Gmail_Resources.gmail import sendmail
 from calendar_resources.Calendar import cal_requests
+from reCAPTCHA_resources.reCAPTCHA import Widgets
 from youtube.youtube_api import YoutubeAPI
 from translate.translate_api import translate_text
 
@@ -14,18 +12,7 @@ app.config["SECRET_KEY"] = "mysecretkey"
 app.config["RECAPTCHA_PUBLIC_KEY"] = "6LdPNysfAAAAAAcz55krT3CLz-RO6kdUCy5ay-kx"
 app.config["RECAPTCHA_PRIVATE_KEY"] = "6LdPNysfAAAAAOTJN3IzODHa4VQVjfYdHrrB3c_l"
 
-class Widgets(FlaskForm):
-    recaptcha = RecaptchaField()
-    name = StringField(label="Name", validators=[DataRequired()])
 
-    radio = RadioField(label="Please select Your Programming language ",
-                       choices=[('Python', "Python"), ["C++", "C++"]])
-
-    select = SelectField(label='select', choices=[("1", "WebApp"), ("2", "Web Scrapping")])
-    comments = TextAreaField(label="comments")
-    date = DateTimeField(label="Birthday", format='%Y-%m-%d')
-
-    submit = SubmitField(label="Submit")
 # @app.route('/')
 # def index():
 #     # # print(mydb)
