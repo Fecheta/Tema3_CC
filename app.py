@@ -1,4 +1,4 @@
-from flask import Flask, Response, jsonify, render_template, request
+from flask import Flask, Response, jsonify, render_template
 import mysql.connector
 
 from Gmail_Resources.gmail import sendmail
@@ -19,7 +19,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/translate/<value>')
+@app.route('/translate2/<value>')
 def translate(value):
     mydb = mysql.connector.connect(
         host="34.88.254.196",
@@ -33,38 +33,32 @@ def translate(value):
     fromLanguage = result['detectedSourceLanguage']
     toLanguage = 'ro'
 
+
     mycursor = mydb.cursor()
 
-    mycursor.execute(
-        f"INSERT INTO translate (original, translated, from_lang, to_lang) VALUES (\"{original}\", \"{translated}\", \"{fromLanguage}\", \"{toLanguage}\")")
+    mycursor.execute(f"INSERT INTO translate (original, translated, from_lang, to_lang) VALUES (\"{original}\", \"{translated}\", \"{fromLanguage}\", \"{toLanguage}\")")
 
     mydb.commit()
     mydb.close()
-    return render_template('translate.html', result=result)
+    return render_template('translate.html', result=result, db='Translation added to database')
 
-
-@app.route('/translate2/<value>')
+@app.route('/translate/<value>')
 def translate2(value):
-    return render_template('translate.html', result=translate_text('ro', value)['translatedText'])
+
+    return render_template('translate.html', result=translate_text('ro', value))
 
 
-@app.route('/gmail', methods=("GET", "POST"))
-def sendgmail():
+@app.route('/gmail/<value>')
+def gmail(value):
+    print(value)
     form = Widgets()
-
-    if request.method == "GET":
-        return render_template('gmail.html', form=form)
-    if request.method == "POST":
-        if (request.form["g-recaptcha-response"] != ''):
-            name = request.form["name"]
-            sendmail("Hello " + name)
-            return render_template("gmail_sent.html")
-        else:
-            return render_template("invalid.html")
+    sendmail()
+    return render_template('gmail.html', form=form)
 
 
 @app.route('/calendar')
 def calendar():
+
     str = cal_requests()
     return render_template('calendar.html', value=list(str))
 

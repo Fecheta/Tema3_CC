@@ -11,6 +11,6 @@ class PlacesAPI:
         payload = {}
         headers = {}
 
-        response = requests.request("GET", url, headers=headers, data=payload)
+        response = requests.request("GET", url, headers=headers, data=payload).json()
 
-        return response.text
+        return response['candidates'][0]
