@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 from Gmail_Resources.Google import Create_Service
 
 
-def sendmail(message):
+def sendmail(email, message):
     CLIENT_SECRET_FILE = 'Gmail_Resources/client_secret.json'
     API_NAME = 'gmail'
     API_VERSION = 'v1'
@@ -14,7 +14,7 @@ def sendmail(message):
 
     emailMsg = message
     mimeMessage = MIMEMultipart()
-    mimeMessage['to'] = "martiscafilip8@gmail.com"
+    mimeMessage['to'] = email
     mimeMessage['subject'] = 'Test'
     mimeMessage.attach(MIMEText(emailMsg, 'plain'))
     raw_string = base64.urlsafe_b64encode(mimeMessage.as_bytes()).decode()
