@@ -7,9 +7,21 @@
     <title>Tema3</title>
 </head>
 <body>
-{{form.recaptcha()}}
-<div>
-    <p>Am trimis un mail. Sper ca a mers :>.</p>
-</div>
+<form class="p-3 mx-auto form-group" action="/gmail" method="POST">
+    <div class="form-group">
+        {{form.name.label(class="form-control-label", for="username")}}
+        {{ form.name(placeholder="Enter name" ,class="form-control", id="username") }}
+    </div>
+    <br>
+    <!--Radio Feild -->
+    <div class="form-group">
+        <div class="radio">
+            {{form.radio.label(class="form-control-label")}}
+            {{ form.radio(class="p-2 form-control ") }}
+        </div>
+    </div>
+    {{form.recaptcha()}}
+    {{form.submit()}}
+</form>
 </body>
 </html>
