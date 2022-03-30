@@ -21,7 +21,7 @@ def translate_text(target, text):
     # will return a sequence of results for each text.
     result = translate_client.translate(text, target_language=target)
 
-    return result['translatedText']
+    return result
 
     # print(u"Text: {}".format(result["input"]))
     # print(u"Translation: {}".format(result["translatedText"]))
