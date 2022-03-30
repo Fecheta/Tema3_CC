@@ -8,6 +8,7 @@ from flask_wtf import FlaskForm, RecaptchaField
 class Widgets(FlaskForm):
     recaptcha = RecaptchaField()
     name = StringField(label="Name", validators=[DataRequired()])
+    email = StringField(label="Email", validators=[DataRequired()])
 
     radio = RadioField(label="Please select Your Programming language ",
                        choices=[('Python', "Python"), ["C++", "C++"]])

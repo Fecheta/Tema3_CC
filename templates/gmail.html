@@ -8,6 +8,11 @@
 </head>
 <body>
 <form class="p-3 mx-auto form-group" action="/gmail" method="POST">
+     <div class="form-group">
+        {{form.email.label(class="form-control-label", for="email")}}
+        {{ form.email(placeholder="Enter email" ,class="form-control", id="email") }}
+    </div>
+    <br>
     <div class="form-group">
         {{form.name.label(class="form-control-label", for="username")}}
         {{ form.name(placeholder="Enter name" ,class="form-control", id="username") }}
