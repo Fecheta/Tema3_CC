@@ -8,7 +8,9 @@
 </head>
 <body>
     <div>
-       <p>(Cu ajutorul lui Dumnezeu) Au fost selectate evenimentele din calendar<br> si au fost afisate in consola (momentan):>.</p>
+       {% for message in value %}
+            <h2 class="c">{{ message }}</h2>
+        {% endfor %}
     </div>
 </body>
 </html>

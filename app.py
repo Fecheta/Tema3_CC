@@ -43,8 +43,8 @@ def gmail(value):
 
 @app.route('/calendar')
 def calendar():
-    cal_requests()
-    return render_template('calendar.html', value=int(1))
+    str = cal_requests()
+    return render_template('calendar.html', value=list(str))
 
 
 @app.route('/youtube/<value>')

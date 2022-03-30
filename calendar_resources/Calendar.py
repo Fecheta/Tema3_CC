@@ -12,18 +12,18 @@ def cal_requests():
                        'https://www.googleapis.com/auth/calendar.events']
     all_events = []
     creds = None
-    if os.path.exists('calendar_resources/token.json'):
-        creds = Credentials.from_authorized_user_file('token.json', CALENDAR_SCOPES)
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file('calendar_resources/client_secret.json', CALENDAR_SCOPES)
-            creds = flow.run_local_server(port=0)
-        with open('calendar_resources/token.json', 'w') as token:
-            token.write(creds.to_json())
+    flow = InstalledAppFlow.from_client_secrets_file('calendar_resources/client_secret.json', CALENDAR_SCOPES)
+    creds = flow.run_local_server(port=0)
     service = build('calendar', 'v3', credentials=creds)
     now = datetime.datetime.utcnow().isoformat() + 'Z'
     events = service.events().list(calendarId='primary', timeMin=now, singleEvents=True, orderBy='startTime').execute()
     all_events.append(events)
     print(all_events)
+    output = []
+    for event in all_events:
+        newstr = ""
+        newstr += event["summary"] + ", updated: " + event["updated"] + ", "
+        for i in event["items"]:
+            newstr += i["summary"] + ", link: " + i["htmlLink"]
+        output.append(newstr)
+    return output
