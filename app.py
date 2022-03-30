@@ -1,5 +1,7 @@
 from flask import Flask, Response, jsonify, render_template, request
 import mysql.connector
+from google.cloud.sql.connector import connector
+import sqlalchemy
 
 from Gmail_Resources.gmail import sendmail
 from calendar_resources.Calendar import cal_requests
@@ -16,7 +18,32 @@ app.config["RECAPTCHA_PRIVATE_KEY"] = "6LdPNysfAAAAAOTJN3IzODHa4VQVjfYdHrrB3c_l"
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    # configure Cloud SQL Python Connector properties
+    def getconn():
+        conn = connector.connect(
+            "cc-tema3-345518:europe-north1:database",
+            "pymysql",
+            user="root",
+            password="12345",
+            db="tema3-db"
+        )
+        return conn
+
+    pool = sqlalchemy.create_engine(
+        "mysql+pymysql://",
+        creator=getconn,
+    )
+
+    # query or insert into Cloud SQL database
+    with pool.connect() as db_conn:
+        # query database
+        result = db_conn.execute("SELECT * from translate").fetchall()
+
+        # Do something with the results
+        # for row in result:
+        #     print(row)
+
+    return render_template("index.html", data=result)
 
 
 @app.route('/translate2/<value>')
