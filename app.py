@@ -2,6 +2,7 @@ from flask import Flask, Response, jsonify, render_template
 import mysql.connector
 from Gmail_Resources.gmail import sendmail
 from calendar_resources.Calendar import cal_requests
+from youtube.youtube_api import YoutubeAPI
 
 app = Flask(__name__)
 
@@ -39,10 +40,19 @@ def gmail(value):
     sendmail()
     return render_template('gmail.html', value=int(value))
 
+
 @app.route('/calendar')
 def calendar():
     cal_requests()
     return render_template('calendar.html', value=int(1))
+
+
+@app.route('/youtube/<value>')
+def youtube_api(value):
+    yapi = YoutubeAPI(value)
+
+    return render_template('youtube.html', video_id=yapi.get_first_from_search())
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
