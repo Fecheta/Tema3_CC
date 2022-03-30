@@ -52,7 +52,6 @@ def translate2(value):
 @app.route('/gmail', methods=("GET", "POST"))
 def sendgmail():
     form = Widgets()
-
     if request.method == "GET":
         return render_template('gmail.html', form=form)
     if request.method == "POST":
