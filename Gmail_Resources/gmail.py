@@ -5,14 +5,14 @@ from email.mime.text import MIMEText
 from Gmail_Resources.Google import Create_Service
 
 
-def sendmail():
+def sendmail(message):
     CLIENT_SECRET_FILE = 'Gmail_Resources/client_secret.json'
     API_NAME = 'gmail'
     API_VERSION = 'v1'
     SCOPES = ['https://mail.google.com/']
     service = Create_Service(CLIENT_SECRET_FILE, API_NAME, API_VERSION, SCOPES)
 
-    emailMsg = "test"
+    emailMsg = message
     mimeMessage = MIMEMultipart()
     mimeMessage['to'] = "martiscafilip8@gmail.com"
     mimeMessage['subject'] = 'Test'
